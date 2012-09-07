@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+	<persistence-unit name="ctm">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<jta-data-source>java:jboss/datasources/ctmDS</jta-data-source>
+		<class>main.java.br.com.ctm.model.Moeda</class>
+		<class>main.java.br.com.ctm.model.Frota</class>
+		<class>main.java.br.com.ctm.model.Aeronave</class>
+		<class>main.java.br.com.ctm.model.Modelo</class>
+		<class>main.java.br.com.ctm.model.CategoriaAeronave</class>
+		<class>main.java.br.com.ctm.model.Operador</class>
+		<class>main.java.br.com.ctm.model.Cliente</class>
+		<class>main.java.br.com.ctm.model.Base</class>
+		<class>main.java.br.com.ctm.model.Proprietario</class>
+		<class>main.java.br.com.ctm.model.Regulamento</class>
+		<class>main.java.br.com.ctm.model.RegulamentoDeHomologacaoAeronautica</class>
+		<class>main.java.br.com.ctm.model.RegulamentoBrasileiroDeHomologacaoAeronautica</class>
+		<class>main.java.br.com.ctm.model.Livro</class>
+		<class>main.java.br.com.ctm.model.LivroEletronico</class>
+		<properties>
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
+			<property name="hibernate.show_sql" value="true"/>
+			<property name="hibernate.use_sql_comments" value="true"/>
+			<property name="hibernate.format_sql" value="true"/>
+		</properties>
+	</persistence-unit>
+</persistence>

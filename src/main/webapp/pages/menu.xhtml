@@ -1,0 +1,85 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<h:form id="formMenuPrincipal" prependId="false">
+		<p:menubar autoDisplay="false" styleClass="borderRadius-none">
+			<p:submenu label="Apoio" icon="ui-icon-note">
+				<p:submenu label="Apoio" icon="ui-icon-note">
+					<p:menuitem value="Categorias de Aeronaves" url="categoriaAeronave.jsf" icon="ui-icon-tag" />
+					<p:menuitem value="Documentos de Aeronaves" url="#" icon="ui-icon-document" />
+					<p:menuitem value="Departamentos" url="#" icon="ui-icon-home" />
+					<p:menuitem value="Fabricantes" url="#" icon="ui-icon-home" />
+					<p:menuitem value="Moedas" url="#" />
+					<p:menuitem value="Estoque" url="#" />
+					<p:menuitem value="Justificativas de Remoção" url="#" />
+					<p:menuitem value="Justificativas de Troca" url="#" />
+					<p:menuitem value="Atividades (OS)" url="#" />
+					<p:menuitem value="Tipos (Inspeção)" url="#" />
+					<p:menuitem value="Tipos (ADs)" url="#" />
+					<p:menuitem value="Categorias de Serviços" url="#" />
+					<p:menuitem value="Classificação de Atividades" url="#" />
+					<p:menuitem value="Setor Cliente/Fornecedor" url="#" />
+					<p:menuitem value="Categorias de Homologação" url="#" />
+				</p:submenu>
+			</p:submenu>
+			<p:submenu label="Cadastros" icon="ui-icon-disk">
+				<p:menuitem value="Frota" url="#{pageContext.request.contextPath}/pages/frota.jsf" icon="ui-icon-arrowreturnthick-1-e" />
+				<p:menuitem value="Aeronaves" url="#" icon="ui-icon-arrowreturnthick-1-e" />
+				<p:menuitem value="Atas" url="#" icon="ui-icon-arrowreturnthick-1-e" />
+				<p:menuitem value="Manuais" url="#" icon="ui-icon-arrowreturnthick-1-e" />
+				<p:menuitem value="Clientes" url="#" icon="ui-icon-arrowreturnthick-1-e" />
+				<p:menuitem value="Vencimentos" url="#" icon="ui-icon-arrowreturnthick-1-e" />
+				<p:menuitem value="Funções" url="#" icon="ui-icon-arrowreturnthick-1-e" />
+				<p:menuitem value="Staff" url="#" icon="ui-icon-arrowreturnthick-1-e" />
+			</p:submenu>
+			<p:submenu label="Componentes" icon="ui-icon-pencil">
+				<p:menuitem value="Master P/N" url="#" icon="ui-icon-arrowreturnthick-1-e" />
+				<p:menuitem value="Serial Number" url="#" icon="ui-icon-arrowreturnthick-1-e" />
+				<p:menuitem value="Pesquisa" url="#" icon="ui-icon-arrowreturnthick-1-e" />
+				<p:menuitem value="Transação" url="#" icon="ui-icon-arrowreturnthick-1-e" />
+				<p:menuitem value="Transação de Menores" url="#" icon="ui-icon-arrowreturnthick-1-e" />
+				<p:menuitem value="Inspeções" url="#" icon="ui-icon-arrowreturnthick-1-e" />
+				<p:menuitem value="Modificação" url="#" icon="ui-icon-arrowreturnthick-1-e" />
+				<p:menuitem value="Empréstimo" url="#" icon="ui-icon-arrowreturnthick-1-e" />
+				<p:menuitem value="Controle de Óleo" url="#" icon="ui-icon-arrowreturnthick-1-e" />
+				<p:menuitem value="Correção de Erros" url="#" icon="ui-icon-arrowreturnthick-1-e" />
+			</p:submenu>
+			<p:submenu label="ADs" icon="ui-icon-pencil">
+				<p:menuitem value="Cadastro" url="#" icon="ui-icon-arrowreturnthick-1-e" />
+				<p:menuitem value="Relatório" url="#" icon="ui-icon-arrowreturnthick-1-e" />
+			</p:submenu>
+			<p:submenu label="Tarefas" icon="ui-icon-pencil">
+				<p:menuitem value="Checks" url="#" icon="ui-icon-arrowreturnthick-1-e" />
+				<p:menuitem value="Pacotes" url="#" icon="ui-icon-arrowreturnthick-1-e" />
+				<p:menuitem value="Relatório de Tarefas" url="#" icon="ui-icon-arrowreturnthick-1-e" />
+			</p:submenu>
+			<p:submenu label="Oficina" icon="ui-icon-pencil">
+				<p:menuitem value="Cadastro" url="#" icon="ui-icon-arrowreturnthick-1-e" />
+				<p:menuitem value="Oficina" url="#" icon="ui-icon-arrowreturnthick-1-e" />
+				<p:menuitem value="Envio" url="#" icon="ui-icon-arrowreturnthick-1-e" />
+				<p:menuitem value="RO" url="#" icon="ui-icon-arrowreturnthick-1-e" />
+				<p:menuitem value="Retorno" url="#" icon="ui-icon-arrowreturnthick-1-e" />
+				<p:menuitem value="Pesquisa" url="#" icon="ui-icon-arrowreturnthick-1-e" />
+			</p:submenu>
+			<p:submenu label="O. de Serviço" icon="ui-icon-pencil">
+				<p:menuitem value="Ordem de Serviço" url="#" icon="ui-icon-arrowreturnthick-1-e" />
+			</p:submenu>
+			<p:submenu label="Relatórios" icon="ui-icon-pencil">
+				<p:menuitem value="Atualização" url="#" icon="ui-icon-arrowreturnthick-1-e" />
+				<p:menuitem value="Componentes" url="#" icon="ui-icon-arrowreturnthick-1-e" />
+				<p:menuitem value="ADs" url="#" icon="ui-icon-arrowreturnthick-1-e" />
+				<p:menuitem value="Projeção" url="#" icon="ui-icon-arrowreturnthick-1-e" />
+				<p:menuitem value="OS" url="#" icon="ui-icon-arrowreturnthick-1-e" />
+				<p:menuitem value="Aeronaves" url="#" icon="ui-icon-arrowreturnthick-1-e" />
+				<p:menuitem value="Livros de Bordo" url="#" icon="ui-icon-arrowreturnthick-1-e" />
+			</p:submenu>
+			<p:submenu label="Ajuda" icon="ui-icon-help">
+				<p:menuitem value="Ajuda" url="#" icon="ui-icon-arrowreturnthick-1-e" />
+			</p:submenu>
+			<p:menuitem value="Sair" url="#" icon="ui-icon-close" />
+		</p:menubar>
+	</h:form>
+</ui:composition>	

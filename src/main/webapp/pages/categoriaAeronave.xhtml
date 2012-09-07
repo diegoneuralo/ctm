@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="#{pageContext.request.contextPath}/templates/template.xhtml">
+<ui:define name="titulo">CTM - Categorias de Aeronaves</ui:define>
+	<ui:define name="jquery">
+		<script type="text/javascript">  
+	    
+		</script>
+	</ui:define>	
+	<ui:define name="header">
+		  <ui:include src="#{pageContext.request.contextPath}/pages/header.xhtml" />
+	</ui:define>
+	<ui:define name="content">
+			<p:panel id="panelPage" header="Categorias de Aeronaves" styleClass="borderRadius-none" >
+			<p:growl id="growl" showDetail="true" life="3000" />
+				<p:panel header="Cadastrar Nova Categoria de Aeronave" id="panelCadastrarCategoriaAeronave" widgetVar="panelCadastrarCategoriaAeronave" closable="true" visible="false">
+					<h:form id="formCadastro" prependId="false">
+						<p:tabView id="tabViewCategoriaAeronave" cache="true" orientation="left">
+							<p:tab id="tab1" title="Cadastro Simples">
+								<h:form id="formCategoriaAeronave" prependId="false">
+									<p:panel header="Cadastro Simples">
+										<h:panelGrid columns="2" cellpadding="5">
+											<h:outputText value="Código:" />
+											<p:inputText id="codigo" title="Deixe este campo em branco caso queira que o sistema gere o código automaticamente"
+											value="#{categoriaAeronaveBean.categoriaAeronave.idCategoriaAeronave}">
+												<p:tooltip for="codigo" showEvent="focus" hideEvent="blur" /> 
+											</p:inputText>
+											<h:outputText value="Descrição:" />
+											<p:inputText id="descricao" title="Insira o nome da categoria" value="#{categoriaAeronaveBean.categoriaAeronave.descricao}">
+												<p:tooltip for="descricao" showEvent="focus" hideEvent="blur" /> 
+											</p:inputText>
+											<p:selectBooleanCheckbox  itemLabel="Publicar?" value="#{categoriaAeronaveBean.categoriaAeronave.status}" />
+											<h:outputText />
+											<p:commandButton value="Cadastrar Frota" actionListener="#{categoriaAeronaveBean.save}" 
+											update=":formCadastro,:formTable" oncomplete="panelCategoriaAeronaveCadastrada.toggle();panelCadastrarCategoriaAeronave.close();" />
+											<p:commandButton value="Limpar Campos" type="reset" update="@form" />
+										</h:panelGrid>
+									</p:panel>
+								</h:form>
+							</p:tab>
+						</p:tabView>
+					</h:form>
+				</p:panel>
+				<p:panel header="Categorias de Aeronaves Cadastradas" id="panelCategoriaAeronaveCadastrada" widgetVar="panelCategoriaAeronaveCadastrada" toggleable="true" collapsed="false">
+					<h:form id="formTable" prependId="false">
+						<h:panelGrid columns="6" cellpadding="5">
+							<h:outputText value="Código:" />
+							<p:inputText value="#{categoriaAeronaveBean.categoriaAeronave.idCategoriaAeronave}" />
+							<h:outputText value="Descrição:" />
+							<p:inputText value="#{categoriaAeronaveBean.categoriaAeronave.descricao}" />
+							<p:commandButton value="Filtrar" update="categorias" actionListener="#{categoriaAeronaveBean.filtrar}"></p:commandButton>
+						</h:panelGrid>
+						<p:contextMenu for="categorias">
+							<p:menuitem value="Detalhes" update="display" icon="ui-icon-search"	oncomplete="detalhesCategoriaDialog.show()" />
+							<p:menuitem value="Editar" update=":formCadastro" icon="ui-icon-pencil" 
+							actionListener="#{categoriaAeronaveBean.prepararEdicao}" oncomplete="panelCadastrarCategoriaAeronave.show();panelCategoriaAeronaveCadastrada.toggle()" />
+							<p:menuitem value="Deletar" update="categorias" icon="ui-icon-close"
+								actionListener="#{categoriaAeronaveBean.deletar}" />
+						</p:contextMenu>
+	
+						<p:dataTable id="categorias" var="categorias"
+							value="#{categoriaAeronaveBean.categorias}"
+							rowKey="#{categorias.idCategoriaAeronave}"
+							selection="#{categoriaAeronaveBean.categoriaSelecionada}"
+							paginator="true"
+							paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							rowsPerPageTemplate="5,10,15" rows="10" selectionMode="single">
+							
+							<f:facet name="header">
+								<p:commandButton value="Cadastrar Nova" update=":formCadastro"
+									onclick="panelCadastrarCategoriaAeronave.show();panelCategoriaAeronaveCadastrada.toggle()" />
+							</f:facet>
+							<p:column headerText="Código">
+								<h:outputText value="#{categorias.idCategoriaAeronave}" />
+							</p:column>
+	
+							<p:column headerText="Descrição">
+								<h:outputText value="#{categorias.descricao}" />
+							</p:column>
+	
+							<p:column headerText="Status">
+								<h:outputText value="#{categorias.status == true ? 'Publicado' : 'Não Publicado'}" />
+							</p:column>
+	
+						</p:dataTable>
+	
+						<p:dialog header="Detalhes" widgetVar="detalhesCategoriaDialog"
+							resizable="false" width="200" showEffect="clip" hideEffect="fold" id="dialog">
+	
+							<h:panelGrid id="display" columns="2" cellpadding="4">
+	
+								<h:outputText value="Código:" />
+								<h:outputText value="#{categoriaAeronaveBean.categoriaSelecionada.idCategoriaAeronave}"
+									style="font-weight:bold" />
+	
+								<h:outputText value="Descrição:" />
+								<h:outputText value="#{categoriaAeronaveBean.categoriaSelecionada.descricao}"
+									style="font-weight:bold" />
+	
+								<h:outputText value="Status:" />
+								<h:outputText value="#{categoriaAeronaveBean.categoriaSelecionada.status == true ? 'Publicado' : 'Não Publicado'}"
+									style="font-weight:bold" />
+									
+							</h:panelGrid>
+						</p:dialog>
+					</h:form>
+				</p:panel>
+			</p:panel>
+	</ui:define>
+	<ui:define name="footer">
+	    <ui:include src="/pages/footer.xhtml" />
+	</ui:define>
+</ui:composition>
+</html>

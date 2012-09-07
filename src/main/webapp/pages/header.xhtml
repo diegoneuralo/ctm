@@ -1,0 +1,12 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<ui:include src="#{pageContext.request.contextPath}/pages/menu.xhtml" />
+	<div id="logo" style="border:none; padding:10px;">
+		<p:graphicImage url="#{pageContext.request.contextPath}/pages/images/logoTeste.png" width="180" style="float:left; margin-right:75px;"/>	
+		<h2 style="font-family:verdana, arial; color:#424548;">CTM - Controle Técnico de Manutenção</h2>
+	</div>
+</ui:composition>	

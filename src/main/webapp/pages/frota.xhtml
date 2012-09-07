@@ -1,0 +1,171 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="#{pageContext.request.contextPath}/templates/template.xhtml">
+<ui:define name="titulo">CTM - Frota</ui:define>
+	<ui:define name="jquery">
+		<script type="text/javascript">  
+	    
+		</script>
+	</ui:define>	
+	<ui:define name="header">
+		  <ui:include src="#{pageContext.request.contextPath}/pages/header.xhtml" />
+	</ui:define>
+	<ui:define name="content">
+			<p:panel id="panelPage" header="Frota" styleClass="borderRadius-none" >
+			<p:growl id="growl" showDetail="true" life="3000" />
+				<p:panel header="Cadastrar Nova Frota" id="panelCadastrarFrota" widgetVar="panelCadastrarFrota" toggleable="true" collapsed="true">
+					<p:tabView id="tabViewFrota" cache="true" orientation="left">
+						<p:tab id="tab1" title="Cadastro Simples">
+							<h:form id="formFrota" prependId="false">
+								<p:panel header="Cadastro Simples">
+									<p:panelGrid columns="2">
+										<p:panelGrid columns="2">
+											<h:outputText value="Código ICAO Frota:" />
+											<p:inputText></p:inputText>
+											<h:outputText value="Fabricante:" />
+											<p:selectOneMenu>
+												 <f:selectItem itemLabel="Select One" itemValue="" />  
+										         <f:selectItem itemLabel="Option 1" itemValue="1" />  
+										         <f:selectItem itemLabel="Option 2" itemValue="2" />  
+										         <f:selectItem itemLabel="Option 3" itemValue="3" />
+											</p:selectOneMenu>
+											<h:outputText value="Descrição:" />
+											<p:inputText></p:inputText>
+											<h:outputText value="Número de Motores:" />
+											<p:inputText></p:inputText>
+											<h:outputText value="Categoria de Homologação:" />
+											<p:selectOneMenu>
+												 <f:selectItem itemLabel="Select One" itemValue="" />  
+										         <f:selectItem itemLabel="Option 1" itemValue="1" />  
+										         <f:selectItem itemLabel="Option 2" itemValue="2" />  
+										         <f:selectItem itemLabel="Option 3" itemValue="3" />
+											</p:selectOneMenu>
+											<h:outputText value="Máx Assento PAX EA:" />
+											<p:inputText></p:inputText>
+											<p:selectBooleanCheckbox itemLabel="Aeronave tem APU?" />
+											<p:selectBooleanCheckbox itemLabel="Utiliza Componentes Ciclos NG?"/>
+										</p:panelGrid>
+										<p:panelGrid columns="2">
+											<h:outputText value="Modelo Frota:" />
+											<p:inputText></p:inputText>
+											<h:outputText value="Tipo Frota:" />
+											<p:selectOneMenu>
+												 <f:selectItem itemLabel="Select One" itemValue="" />  
+										         <f:selectItem itemLabel="Option 1" itemValue="1" />  
+										         <f:selectItem itemLabel="Option 2" itemValue="2" />  
+										         <f:selectItem itemLabel="Option 3" itemValue="3" />
+											</p:selectOneMenu>
+											<h:outputText value="Grupo Motor Propulsor:" />
+											<p:selectOneMenu>
+												 <f:selectItem itemLabel="Select One" itemValue="" />  
+										         <f:selectItem itemLabel="Option 1" itemValue="1" />  
+										         <f:selectItem itemLabel="Option 2" itemValue="2" />  
+										         <f:selectItem itemLabel="Option 3" itemValue="3" />
+											</p:selectOneMenu>
+											<h:outputText value="Letras Iniciais do S/N:" />
+											<p:inputText></p:inputText>
+											<h:outputText value="Trip. Min. EA:" />
+											<p:inputText></p:inputText>
+											<h:outputText value="Número Máx Assento EA:" />
+											<p:inputText></p:inputText>
+											<p:selectBooleanCheckbox itemLabel="Aeronave Pressurizada?" />
+										</p:panelGrid>
+									</p:panelGrid>
+									<p:panelGrid columns="2">
+										<p:commandButton value="Cadastrar Frota"></p:commandButton>
+										<p:commandButton value="Limpar Campos"></p:commandButton>
+									</p:panelGrid>
+								</p:panel>
+							</h:form>
+						</p:tab>
+						<p:tab id="tab2" title="Cadastro Avançado">
+							<ui:include src="frotaCompleta.xhtml" />
+						</p:tab>
+					</p:tabView>
+				</p:panel>
+				<p:panel header="Frotas Cadastradas" id="panelFrotaCadastrada" widgetVar="panelFrotaCadastrada" toggleable="true" collapsed="false">
+					<h:form id="formTable" prependId="false">
+					<p:panelGrid columns="6">
+						<h:outputText value="Frota/Modelo:" />
+						<p:inputText></p:inputText>
+						<h:outputText value="Fabricante:" />
+						<p:inputText></p:inputText>
+						<h:outputText value="Código ICAO:" />
+						<p:inputText></p:inputText>
+						<h:outputText value="Grupo Motor - Propulsor:" />
+						<p:inputText></p:inputText>
+						<h:outputText value="Tipo da Frota:" />
+						<p:inputText></p:inputText>
+						<p:commandButton value="Filtrar"></p:commandButton>
+					</p:panelGrid>
+					<p:contextMenu for="cars">
+						<p:menuitem value="View" update="@form" icon="ui-icon-search"
+							oncomplete="carDialog.show()" />
+						<p:menuitem value="Delete" update="cars" icon="ui-icon-close"
+							actionListener="#{tableBean.deleteCar}" />
+					</p:contextMenu>
+
+					<p:dataTable id="cars" var="car" value="#{tableBean.carsSmall}"
+						rowKey="#{car.model}" selection="#{tableBean.selectedCar}" paginator="true"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                 		rowsPerPageTemplate="5,10,15" rows="10"	selectionMode="single">
+
+						<f:facet name="header">
+							<p:commandButton value="Cadastrar Nova" onclick="panelCadastrarFrota.toggle();panelFrotaCadastrada.toggle()"/>
+						</f:facet>
+						<p:column headerText="Model">  
+				            <h:outputText value="#{car.model}" /> 
+				        </p:column>
+
+						<p:column headerText="Year">  
+				            <h:outputText value="#{car.year}" />
+				        </p:column>
+
+						<p:column headerText="Manufacturer">  
+				            <h:outputText value="#{car.model}" />  
+				        </p:column>
+
+						<p:column headerText="Color"> 
+							<h:outputText value="#{car.year}" />				              
+				        </p:column>
+
+					</p:dataTable>
+
+					<p:dialog header="Car Detail" widgetVar="carDialog"
+						resizable="false" width="200" showEffect="clip" hideEffect="fold" id="dialog">
+
+						<h:panelGrid id="display" columns="2" cellpadding="4">
+
+							<h:outputText value="Model:" />
+							<h:outputText value="#{tableBean.selectedCar.model}"
+								style="font-weight:bold" />
+
+							<h:outputText value="Year:" />
+							<h:outputText value="#{tableBean.selectedCar.year}"
+								style="font-weight:bold" />
+
+							<h:outputText value="Manufacturer:" />
+							<h:outputText value="#{tableBean.selectedCar.manufacturer}"
+								style="font-weight:bold" />
+
+							<h:outputText value="Color:" />
+							<h:outputText value="#{tableBean.selectedCar.color}"
+								style="font-weight:bold" />
+						</h:panelGrid>
+					</p:dialog>
+				</h:form>
+				</p:panel>
+			</p:panel>
+	</ui:define>
+	<ui:define name="footer">
+	    <ui:include src="/pages/footer.xhtml" />
+	</ui:define>
+</ui:composition>
+</html>
