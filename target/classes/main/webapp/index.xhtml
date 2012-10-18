@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="templates/template.xhtml">
+	<ui:define name="jquery">
+		<script type="text/javascript">  
+	    function handleLoginRequest(xhr, status, args) {  
+	        if(args.validationFailed || !args.loggedIn) {  
+	            jQuery('#panelLogin').effect("shake", { times:3 }, 100);  
+	        }
+	    }  
+	</script>
+	</ui:define>
+	<ui:define name="header">
+
+	</ui:define>
+	
+	<ui:define name="content">
+			<p:panel id="panelPage" header="CTM - Controle Técnico de Manutenção de Aeronaves" style="border:0; padding:0px;">
+				<p:growl id="growl" showDetail="true" life="3000" />
+				<p:panel id="panelCentral"	style="border:none; width:400px; margin:0 auto; padding:100px;">
+					<p:panel id="panelLogin" header="Autentication"	style="width:100%; margin:0 auto;">
+						<h:form id="formLogin" style="margin:0 auto;">
+							<h:panelGrid columns="2" cellpadding="5">
+								<h:outputLabel for="login" value="Username:" />
+								<p:inputText value="" id="login" required="true" label="login" requiredMessage="Please enter your username" />
+								<h:outputLabel for="password" value="Password:" />
+								<p:password value="" id="password" required="true" label="password" requiredMessage="Please enter your password" />
+								<h:outputText value="Remember" />
+								<p:selectBooleanCheckbox />
+								<p:commandButton id="loginButton" value="Login" update=":growl"	oncomplete="handleLoginRequest(xhr, status, args);" />
+							</h:panelGrid>
+						</h:form>
+					</p:panel>
+				</p:panel>
+			</p:panel>
+	</ui:define>
+	<ui:define name="footer">
+	    Add your footer here or delete to use the default
+	</ui:define>
+</ui:composition>
+</html>
